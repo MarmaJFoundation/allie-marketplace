@@ -4,7 +4,6 @@ const collectionSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, "Please provide collection name"],
-    unique: true,
     trim: true,
   },
   description: {
@@ -21,9 +20,15 @@ const collectionSchema = new mongoose.Schema({
   },
   price: {
     type: Number,
-    required: [true, 'A collection must have a price'],
+    required: [true, "A collection must have a price"],
   },
-  media: [String],
+  files: [String],
+  nftImage: {
+    type: String,
+    required: [true, "Please provide NFT Image Link"],
+    unique: true,
+    trim: true,
+  },
 });
 
 collectionSchema.index({ metadata_id: 1 });

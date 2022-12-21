@@ -41,15 +41,7 @@ export const MainSection = () => {
                 />
               </span>
             </div>
-            <div className="left">
-              <button
-                className="btn collection__btn"
-                id="btn-unlock-collection"
-                data-nftid="loyalticket.mintspace2.testnet:8c81bb5b7c8fe197865be325f614770c"
-              >
-                Unlock Collection
-              </button>
-            </div>
+            <div className="left"></div>
           </div>
         </div>
       </div>
