@@ -55,7 +55,7 @@ export const Buy = ({ meta }) => {
     const { data, error } = await new Wallet().init({
       networkName: Network.testnet,
       chain: Chain.near,
-      apiKey: "511a3b51-2ed5-4a27-b165-a27a01eebe0a",
+      apiKey: process.env.NEXT_PUBLIC_MINTBASE_API,
     });
 
     const { wallet } = data;
@@ -73,11 +73,6 @@ export const Buy = ({ meta }) => {
 
   const ele = nftData ? (
     <>
-      <section className="section section-buy-nft">
-        <h1 className="text--h1">
-          Buy This NFT To Unlock This Collection
-        </h1>
-      </section>
       <section className="section section-buy-nft">
         <div className="collection">
           <div className="collection__left">
