@@ -9,11 +9,6 @@ const UploadFiles = () => {
   const [collectionImages, setCollectionImages] = useState();
   const [isUploading, setIsUploading] = useState(false);
 
-  const envVar = {
-    mintBaseApi: process.env.NEXT_PUBLIC_MINTBASE_API,
-    backendUrl: "http://localhost:8000",
-  };
-
   const router = useRouter();
   const metadata_id = router.query.metadata_id;
 
@@ -68,33 +63,45 @@ const UploadFiles = () => {
     const { data, error } = await new Wallet().init({
       networkName: Network.testnet,
       chain: Chain.near,
-      apiKey: envVar.mintBaseApi,
+      apiKey: process.env.NEXT_PUBLIC_MINTBASE_API,
     });
+
     const { wallet } = data;
 
     const signerRes = await wallet.signMessage("test-message");
 
-    const formData = new FormData();
+    var formdata = new FormData();
 
-    formData.append("name", nftData.title);
-    formData.append("description", nftData.description);
-    formData.append("files", collectionImages);
-    formData.append("price", nftData.price);
-    formData.append("metadata_id", metadata_id);
-    formData.append("nftImage", nftData.media);
-    formData.append("signerRes", signerRes);
+    formdata.append("name", nftData.title);
+    formdata.append("description", nftData.description);
+    formdata.append("price", nftData.price);
+    formdata.append("metadata_id", metadata_id);
+    formdata.append("nftImage", nftData.media);
+    formdata.append("signerRes", JSON.stringify(signerRes));
 
-    const res = await axios({
-      method: "POST",
-      url: `${envVar.backendUrl}/api/collection/addCollection`,
-      data: formData,
+    Object.values(collectionImages).forEach((el) => {
+      formdata.append("files", el, el.name);
     });
 
-    setIsUploading(false);
+    axios
+      .post(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/collection/addCollection`,
+        formdata,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
+      .then((response) => {
+        alert("Collection Created")
+        window.location.href = `/collection/${metadata_id}`;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
 
-    if (res) {
-      window.location.href = `/collection/${metadata_id}`;
-    }
+    setIsUploading(false);
   };
 
   const ele = nftData ? (
