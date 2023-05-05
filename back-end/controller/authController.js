@@ -1,37 +1,12 @@
 const fetch = require("node-fetch");
-const { Wallet, Chain, Network } = require("mintbase");
 
 const catchAsync = require("./../utils/catchAsync.js");
 const AppError = require("./../utils/appError.js");
 
-exports.protect = catchAsync(async (req, res, next) => {
+exports.connectedAccount = catchAsync(async (req, res, next) => {
   // Check the connected wallet User
-  const { data: walletData, error } = await new Wallet().init({
-    networkName: Network.testnet,
-    chain: Chain.near,
-    apiKey: process.env.MINTASE_API_KEY,
-  });
-
-  if (error) {
-    console.log("ERR: ", error);
-  }
-
-  const { wallet } = walletData;
-
-  const signerRes = req.body.signerRes.data;
-
-  const message = "test-message";
-
-  const verfiy = wallet.verifySignature({
-    accountId: signerRes.accountId,
-    message: message,
-    publicKey: signerRes.publicKey,
-    signature: signerRes.signature,
-  });
-
-  if (verfiy) {
-    // GRANT ACCESS TO THE PROTECTED ROUTE
-    req.user = signerRes.accountId;
+  if (req.body.connectedAccount) {
+    req.user = req.body.connectedAccount;
     next();
   } else {
     return next(new AppError("UnAuthenticated ", 403));
@@ -42,26 +17,13 @@ exports.isAdmin = catchAsync(async (req, res, next) => {
   if (process.env.OWNER_WALLET === req.user) {
     next();
   } else {
-    return next(new AppError("UnAuthenticated ", 403));
+    return next(new AppError("UnAuthenticated Signer Failed", 403));
   }
 });
 
 exports.isNFTOwned = catchAsync(async (req, res, next) => {
-  async function fetchGraphQL(operationsDoc, operationName, variables) {
-    const result = await fetch(
-      "https://interop-testnet.hasura.app/v1/graphql",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          query: operationsDoc,
-          variables: variables,
-          operationName: operationName,
-        }),
-      }
-    );
-
-    return await result.json();
-  }
+  const walletAddress = req.user;
+  const metadata_id = req.body.metadata_id;
 
   const operations = (walletAddress_, metadata_id_) => {
     return `
@@ -76,9 +38,23 @@ exports.isNFTOwned = catchAsync(async (req, res, next) => {
   `;
   };
 
-  const walletAddress = req.user;
+  async function fetchGraphQL(operationsDoc, operationName, variables) {
+    const qureyHttpLink =
+      process.env.NEAR_NETWORK === "mainnet"
+        ? "https://interop-mainnet.hasura.app/v1/graphql"
+        : "https://interop-testnet.hasura.app/v1/graphql";
 
-  const metadata_id = req.body.metadata_id;
+    const result = await fetch(qureyHttpLink, {
+      method: "POST",
+      body: JSON.stringify({
+        query: operationsDoc,
+        variables: variables,
+        operationName: operationName,
+      }),
+    });
+
+    return await result.json();
+  }
 
   function fetchCheckNFT() {
     return fetchGraphQL(operations(walletAddress, metadata_id), "checkNFT", {});
@@ -100,9 +76,13 @@ exports.isNFTOwned = catchAsync(async (req, res, next) => {
 
   if (errors || !pass) {
     console.error("ERROR : ", errors);
-    return next(new AppError("UnAuthenticated ", 403));
+    return next(
+      new AppError(
+        "UnAuthenticated. Sorry You Have Not Own This Collection NFT.",
+        403
+      )
+    );
   }
-
   // if there is data that means the owner owns that NFT
   if (pass) {
     next();

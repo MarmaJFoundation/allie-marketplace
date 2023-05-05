@@ -10,38 +10,33 @@ const AppError = require("./utils/appError.js");
 
 dotenv.config();
 
-// process.on("uncaughtException", (err) => {
-//   console.log("UNCAUGHT EXCEPTION! 💥 Shutting down...");
-//   console.log(err.name, err.message);
-//   process.exit(1);
-// });
-
 const app = express();
 
+app.use(cors())
+
 // For frontend file serving
-app.set("view engine", "pug");
 app.set("views", "./view");
 app.use(express.static("./public"));
-
-app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // to compress the res size to the user
 app.use(compression());
 
-// For view
-// app.use('/', viewRouter);
 
 // For API
 app.use("/api/collection", collectionRouter);
+
+app.get("/", (req, res) => {
+  res.send("Success");
+});
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 
 // For Server setup
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8000;
 let DB_URL = process.env.DB_CONNECTION_URL;
 
 mongoose

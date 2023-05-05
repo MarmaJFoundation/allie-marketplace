@@ -8,46 +8,30 @@ Allie’s Marketplace is an NFT marketplace built on NEAR Protocol. This is a hu
 
 Our goal is to encourage web3 space adoption and utilisation by not-safe-for-work (NSFW) content producers through the development of a user-friendly and engaging NFT marketplace.
 
-  
-
 Since our software is open source, anyone can use it to create their own decentralised marketplace. For creators who struggle to make money on centralised platforms and do not have full control over their content, this will be incredibly helpful. Because the marketplaces built on this code will be decentralised, they will also be shielded from censorship.
-
-## How To Use
-
-**The planned flow is as follows:**
-
-1) users go to the website and connect their wallets* to purchase NFTs and gain access to the content; 
-2) they can then make offers on the NFTs listed; 
-3) following the conclusion of the bidding, the buyer receives ownership of the NFT. If the user does not have a wallet, there will be the ability to create one instantly.
-
- 
 
 ## Code Details
 
 **Technology stack:**
+
 - Backend:
 
-  
-	- Node.js
-	- Express.js
-	- MongoDB
-	- AWS S3 (For censored content storage) [Not implemented]
-	- [MintbaseJS](https://github.com/Mintbase/mintbase-js) (For Authentication)
-
-  
+  - Node.js
+  - Express.js
+  - MongoDB
+  - Supabase (For censored content storage)
+  - [MintbaseJS](https://github.com/Mintbase/mintbase-js) (For Authentication)
 
 - Frontend:
 
-	- NextJS
-	- [MintbaseJS](https://github.com/Mintbase/mintbase-js) (For Contract Interaction)
-
+  - NextJS (ReactJS)
+  - [MintbaseJS](https://github.com/Mintbase/mintbase-js) (For Contract Interaction)
 
 ## How To Run Code
 
-> :warning: **Fill the .env file before run the code**: need env variables in given in .env file template 
+> :warning: **Fill the .env file before run the code**: need env variables in given in .env file template
 
 ### Backend
-
 
 First, run the backend server:
 
@@ -58,12 +42,11 @@ npm install
 npm run start
 ```
 
-Open [http://localhost:8000](http://localhost:8000) with your browser to see the result.
+Open http://localhost:[PORT] with your browser to see the result.
 
 You can start editing the page by modifying `app.js`. The page auto-updates as you edit the file.
 
 ### Frontend
-
 
 First, run the development server:
 

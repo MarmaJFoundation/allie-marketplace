@@ -42,7 +42,7 @@ const Minter = () => {
       console.error("ERROR : ", fileError);
     }
 
-    await wallet.minter.setMetadata({
+    wallet.minter.setMetadata({
       title: formData.title,
       description: formData.description,
     });
@@ -59,12 +59,21 @@ const Minter = () => {
 
   return (
     <div className="main">
-      <section className="title text--center">
+      <section className="page-header-section style-1">
         <div className="container">
-          <h1 className="HIW text--h1">Create Collection</h1>
-          <h2 className="text--h2 ma--bottom">
-            Mint the NFT, Upload the Videos and Create the collection.
-          </h2>
+          <div className="page-header-content">
+            <div className="page-header-inner">
+              <div className="page-title">
+                <h2>Mint Page</h2>
+              </div>
+              <ol className="breadcrumb">
+                <li>
+                  <a href="index.html">Mint</a>
+                </li>
+                <li className="active">NFT</li>
+              </ol>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -120,19 +129,16 @@ const Minter = () => {
             />
           </div>
           {isLoading ? (
-            <button
-              className="btn btn--primary text-base--1 ma--top-side"
-              id="btn-mint-nft"
-            >
-              Loading...
+            <button className="default-btn move-right" id="btn-mint-nft">
+              <span>Loading...</span>
             </button>
           ) : (
             <button
-              className="btn btn--primary text-base--1 ma--top-side"
+              className="default-btn move-right"
               id="btn-mint-nft"
               onClick={(e) => onClickMint(e)}
             >
-              Mint NFT
+              <span>Mint NFT</span>
             </button>
           )}
         </form>

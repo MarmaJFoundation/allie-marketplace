@@ -1,43 +1,63 @@
 /* eslint-disable @next/next/no-img-element */
-// eslint-disable-next-line @next/next/no-img-element
 import Link from "next/link";
 
 export const Collection = ({ post }) => {
   return (
-    <div className="collection">
-      <div className="collection__left">
-        <div className="right">
-          <img
-            src={post.nftImage}
-            alt="NFT image"
-            className="collection__nft ma--bottom"
-          />
-          <h2 className="collection__name ma--bottom">{post.name}</h2>
-          <p className="collection__description ma--bottom text-base--1">
-            {post.description}
-          </p>
-          <span className="collection__price text--h2 ma--bottom">
-            {Math.round(
-              post.price.toLocaleString("fullwide", {
-                useGrouping: false,
-              }) *
-                10 ** -24
-            )}
-            <img
-              src="https://cryptologos.cc/logos/near-protocol-near-logo.svg?v=023"
-              alt="NEAR"
-              className="collection__price--img"
-            />
-          </span>
-        </div>
-        <div className="left">
-          <Link href={`/collection/${post.metadata_id}`}>
-            <button className="btn collection__btn" id="btn-unlock-collection">
-              Unlock Collection
-            </button>
-          </Link>
+    <Link
+      href={`/collection/${post.metadata_id}`}
+      className="col-xl-3 col-lg-4 col-sm-6"
+    >
+      <div className="nft-item home-4">
+        <div className="nft-inner">
+          {/* <!-- nft top part --> */}
+          <div className="nft-item-top d-flex justify-content-between align-items-center">
+            <div className="author-part">
+              <ul className="author-list d-flex">
+                <li className="single-author d-flex align-items-center">
+                  <Link href="author.html" className="veryfied">
+                    <img
+                      loading="lazy"
+                      src="/assets/images/seller/author.jpg"
+                      alt="author-img"
+                    />
+                  </Link>
+                  <h6>
+                    <a href="author.html">Allie eve knox</a>
+                  </h6>
+                </li>
+              </ul>
+            </div>
+          </div>
+          {/* <!-- nft-bottom part --> */}
+          <div className="nft-item-bottom">
+            <div className="nft-thumb">
+              <img loading="lazy" src={post.nftImage} alt="nft-img" style={{width: "270px" , height: "260px"}}/>
+            </div>
+            <div className="nft-content">
+              <h4>
+                <Link href="item-details.html">{post.name}</Link>
+              </h4>
+              <div className="price-like d-flex justify-content-between align-items-center">
+                <p className="nft-price">
+                  Price:{" "}
+                  <span className="yellow-color">
+                    {Math.round(
+                      post.price.toLocaleString("fullwide", {
+                        useGrouping: false,
+                      }) *
+                        10 ** -24
+                    )}{" "}
+                    NEAR
+                  </span>
+                </p>
+                {/* <a href="#" className="nft-like">
+                  <i className="icofont-heart"></i> 230
+                </a> */}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
