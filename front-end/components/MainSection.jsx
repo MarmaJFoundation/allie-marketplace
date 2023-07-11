@@ -19,7 +19,7 @@ export const MainSection = ({ collection }) => {
                   <span className="theme-color-4"> Buy</span>, Unlock, and
                   <span className="theme-color-4">
                     <br />
-                    Enjoy &nbsp;
+                    Enjoy&nbsp;
                   </span>
                   NSFW Content.
                 </h1>
