@@ -16,12 +16,12 @@ export const MainSection = ({ collection }) => {
             <div className="col-lg-7">
               <div className="banner-content">
                 <h1>
-                  <span className="theme-color-4"> Buy</span>, Unlock And
+                  <span className="theme-color-4"> Buy</span>, Unlock, and
                   <span className="theme-color-4">
                     <br />
-                    Enjoy.
+                    Enjoy
                   </span>
-                  The NSFW Content
+                  NSFW Content.
                 </h1>
                 <p>
                   Digital Marketplace For NSFW Content And Non-Fungible Tokens.
