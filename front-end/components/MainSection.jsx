@@ -19,7 +19,7 @@ export const MainSection = ({ collection }) => {
                   <span className="theme-color-4"> Buy</span>, Unlock, and
                   <span className="theme-color-4">
                     <br />
-                    Enjoy
+                    Enjoy 
                   </span>
                   NSFW Content.
                 </h1>
@@ -70,7 +70,7 @@ export const MainSection = ({ collection }) => {
                                       />
                                     </a>
                                     <h6>
-                                      <a href="#">Aliie eve knox</a>
+                                      <a href="#">Aliie Eve Knox</a>
                                     </h6>
                                   </li>
                                 </ul>
