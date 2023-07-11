@@ -71,12 +71,7 @@ export const Footer = () => {
                     </li>
                     <li className="social-link">
                       <a href="https://www.tiktok.com/@allieeveknoxthirst" data-blast="bgColor">
-                        <i className="icofont-twitch"></i>
-                      </a>
-                    </li>
-                    <li className="social-link">
-                      <a href="#" data-blast="bgColor">
-                        <i className="icofont-reddit"></i>
+                        <i className="icofont-tiktok"></i>
                       </a>
                     </li>
                     <li className="social-link">
@@ -85,7 +80,7 @@ export const Footer = () => {
                       </a>
                     </li>
                     <li className="social-link">
-                      <a href="https://spoilallieknox.wixsite.com" data-blast="bgColor">
+                      <a href="https://spoilallieknox.wixsite.com/my-site" data-blast="bgColor">
                         <i className="icofont-dribble"></i>
                       </a>
                     </li>
