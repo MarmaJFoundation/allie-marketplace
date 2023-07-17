@@ -65,22 +65,22 @@ export const Footer = () => {
                   </div>
                   <ul className="social-list d-flex flex-wrap align-items-center mb-0">
                     <li className="social-link">
-                      <a href="https://twitter.com/allieeveknox" target="_blank" data-blast="bgColor">
+                      <a href="https://twitter.com/allieeveknox" data-blast="bgColor">
                         <i className="icofont-twitter"></i>
                       </a>
                     </li>
                     <li className="social-link">
-                      <a href="https://www.tiktok.com/@allieeveknoxthirst" target="_blank" data-blast="bgColor">
+                      <a href="https://www.tiktok.com/@allieeveknoxthirst" data-blast="bgColor">
                         <i className="icofont-tiktok"></i>
                       </a>
                     </li>
                     <li className="social-link">
-                      <a href="https://www.instagram.com/allieeveknox/" target="_blank" data-blast="bgColor">
+                      <a href="https://www.instagram.com/allieeveknox/" data-blast="bgColor">
                         <i className="icofont-instagram"></i>
                       </a>
                     </li>
                     <li className="social-link">
-                      <a href="https://spoilallieknox.wixsite.com/my-site" target="_blank" data-blast="bgColor">
+                      <a href="https://spoilallieknox.wixsite.com/my-site" data-blast="bgColor">
                         <i className="icofont-heart"></i>
                       </a>
                     </li>
